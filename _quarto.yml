@@ -8,10 +8,10 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: projects.qmd
-        text: SURF Intro
-      - href: basics.qmd
-        text: Basics
+      - href: edu.qmd
+        text: Education
+    #  - href: basics.qmd
+    #    text: Basics
     #  - href: onelayernn.qmd
     #    text: Machine Learning Methods 
 format: 
