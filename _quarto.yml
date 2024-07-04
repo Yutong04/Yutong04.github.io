@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: docs
+  
+website: 
+  title: "Yutong Homepage"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: projects.qmd
+        text: SURF Intro
+      - href: basics.qmd
+        text: Basics
+    #  - href: onelayernn.qmd
+    #    text: Machine Learning Methods 
+format: 
+  html: 
+    theme: cosmo
+    toc: true
