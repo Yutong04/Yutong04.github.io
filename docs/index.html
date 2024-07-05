@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Home – Yutong Homepage</title>
+<title>Use of glm – Yutong Homepage</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -152,11 +152,7 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./edu.html"> 
-<span class="menu-text">Education</span></a>
+<span class="menu-text">Use of glm</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./ggplot2.html"> 
@@ -193,6 +189,7 @@ window.Quarto = {
   <li><a href="#poisson-regression" id="toc-poisson-regression" class="nav-link" data-scroll-target="#poisson-regression">Poisson Regression</a>
   <ul class="collapse">
   <li><a href="#泊松分布" id="toc-泊松分布" class="nav-link" data-scroll-target="#泊松分布">泊松分布</a></li>
+  <li><a href="#泊松回归模型" id="toc-泊松回归模型" class="nav-link" data-scroll-target="#泊松回归模型">泊松回归模型</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -202,7 +199,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Home</h1>
+<h1 class="title">Use of glm</h1>
 </div>
 
 
@@ -433,7 +430,10 @@ AIC: 3495.149 </code></pre>
 <p>泊松分布适合于描述单位时间内随机事件发生的次数。 (1)泊松分布是一种描述和分析稀有事件的概率分布。要观察到这类事件，样本含量必须很大 。 (2)lambda是泊松分布所依赖的唯一参数。lambda值愈小，分布愈偏倚，随着lambda增大，分布趋于对称。 (3)当lambda=20时分布泊松分布接近于正态分布；当lambda=50时，可以认为泊松分布呈正态分布。 在实际工作中，当lambda大于等于20时就可以用正态分布来近似地处理泊松分布的问题。</p>
 <p><span class="math display">\[
 f(y ; \lambda)=\frac{\lambda^y}{y!} e^{-\lambda}, y=0,1, \ldots
-\]</span> ### 泊松回归模型</p>
+\]</span></p>
+</section>
+<section id="泊松回归模型" class="level3">
+<h3 class="anchored" data-anchor-id="泊松回归模型">泊松回归模型</h3>
 <p><span class="math display">\[\begin{gathered}
 Y \sim \operatorname{Poisson}(\lambda), \\
 g(\lambda)=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p \\

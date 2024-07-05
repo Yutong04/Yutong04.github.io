@@ -2,3 +2,154 @@
 title: "Use os ggplot2"
 editor: visual
 ---
+
+## ggplot 语法结构
+
+ggplot2 is  an open-source data visualization package for the statistical programming lauguage R.
+aes: aestheticmapping(美学映射)
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+#加载数据集mpg
+data(mpg)
+#设置一个画布，定义x轴y轴，颜色col，大小size，添加图形类型(此处为散点图geom_point())，geom_smooth()表示平滑线(method = "lm"线性)，facet_wrap(~drv)表示切开，theme_bw()添加主题
+ggplot(data=mpg, mapping=
+         aes(x=displ,y=hwy, col=drv, ))+
+  geom_point()+
+  facet_wrap(~drv)+
+  theme_bw()
+```
+
+画箱线图
+
+```{r}
+#coord_flip()旋转函数
+library(ggplot2)
+library(tidyverse)
+ggplot(mpg,aes(hwy,col=drv))+
+  geom_boxplot()+
+  facet_wrap(~drv)+
+  coord_flip()
+```
+
+x, y轴两变量箱线图
+
+```{r}
+ggplot(mpg,aes(hwy,drv,col=drv))+
+  geom_boxplot()
+```
+
+## ggplot2 绘制箱形图
+
+```{r}
+?msleep
+data("msleep")
+#添加到environment
+attach(msleep)
+#x动物类型，y清醒时长，coord_flip()可以调换横纵坐标
+ggplot(data=msleep,mapping=aes(x=vore, y=awake))+
+  geom_boxplot(colour=1,fill=5)+
+  coord_flip()
+#另一种写法
+msleep %>% ggplot(aes(vore, awake))+
+  geom_boxplot()+
+  coord_flip()
+```
+
+## ggplot2 绘制条形图
+
+```{r}
+#先drop筛选除去动物类型空数据N/A，再进行绘图
+#先设置横轴
+#geom_bar(fill="6E5175")代表条形图填充的颜色
+#coord_flip()代表旋转
+msleep %>%
+  drop_na(vore) %>%
+  ggplot(aes(x=vore))+
+  geom_bar(fill="6E5175")+
+  #coord_flip()+
+  theme_bw()+
+  labs(x="Who eats what",y="Freq",
+       title = "Number of observations per order")
+#fct_infreq表示对条形图进行从高到低的排序
+msleep %>%
+  drop_na(vore) %>%
+  ggplot(aes(fct_infreq(vore)))+
+  geom_bar(fill="6E5175")+
+  #coord_flip()+
+  theme_bw()+
+  labs(x="Who eats what",y="Freq",
+       title = "Number of observations per order")
+```
+
+## ggplot2 绘制直方图
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+data(mpg)
+#binwidth组距
+mpg %>%
+  ggplot(aes(hwy))+
+  geom_histogram(binwidth = 10,
+                 fill=2,
+                 col=1)
+summary(mpg$hwy)
+#3位组距，10-45
+#lims设置横纵轴范围
+#scale_x_continuous重新设立刻度
+mpg %>%
+  ggplot(aes(hwy))+
+  geom_histogram(breaks =
+                   seq(10,45,3),
+                 fill=5,
+                 col=1)+
+  lims(x=c(5,50),y=c(0,60))+
+  labs(title ="Histogram of hwy",
+       x="Highway miles per gallon",
+       )+
+  scale_x_continuous(breaks = seq(10,50,3))+
+  scale_y_continuous(breaks = seq(0,60,5))+
+  theme_bw()
+```
+
+## ggplot2 绘制散点图
+
+```{r}
+#col=vore(不同类别动物使用不同颜色表示)
+#alpha点的透明度
+msleep %>%
+  drop_na(vore) %>%
+  ggplot(aes(sleep_total,bodywt,col=vore))+
+  geom_point(size=3,alpha=0.5)
+
+#添加平滑线且指定线性模型geom_smooth(method = lm, se=F)，se=F代表不添加置信带
+#geom_line()函数将所有的数据点按照x轴上变量的顺序连接它们
+msleep %>%
+  drop_na(vore) %>%
+  ggplot(aes(brainwt,bodywt))+
+  geom_point(size=3,alpha=0.5)+
+  geom_smooth(method = lm, se=F)+
+  facet_wrap(~vore)+
+  labs(title = "Brain weight & Body weight")
+  geom_line()
+  
+#two or more numeric
+#filter(bodywt<2)代表仅保留bodywt<2的数据，为了排除极大值
+#color= sleep_total,size=awake，点的颜色代表睡眠时长，点的大小代表清醒时长
+#facet_wrap(~vore)切面
+msleep %>%
+  filter(bodywt<2) %>%
+  ggplot(aes(bodywt,brainwt))+
+  geom_point(aes(color= sleep_total,size=awake))+
+  geom_smooth()+
+  facet_wrap(~vore)+
+  labs(x = "Body weight",
+       y = "Brain weight",
+       title = "Brain and Body weight")
+theme_minimal()
+
+
+
+```

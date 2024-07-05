@@ -7,9 +7,9 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - href: edu.qmd
-        text: Education
+        text: Use of glm
+    #  - href: edu.qmd
+    #    text: Education
       - href: ggplot2.qmd
         text: Use of ggplot2
     #  - href: onelayernn.qmd

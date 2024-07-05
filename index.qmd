@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "Use of glm"
 format: html
 editor: visual
 ---
@@ -74,6 +74,7 @@ summary(house.plr)
 $$
 f(y ; \lambda)=\frac{\lambda^y}{y!} e^{-\lambda}, y=0,1, \ldots
 $$
+
 ### 泊松回归模型
 
 $$\begin{gathered}
