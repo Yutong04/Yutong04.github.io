@@ -4,23 +4,98 @@ format: html
 editor: visual
 ---
 
-## Quarto
+## About glm
+###  Linear regression
+$$y=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p+\epsilon, \epsilon \sim N\left(0, 
+\sigma^2\right)$$
+ 
+### General Linear Regression
+$$\begin{gathered}
+Y \mid x \sim F(y, \mu) \\
+g(\mu)=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p
+\end{gathered}$$
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+### Logistic Regression
+$$\operatorname{logit}(p)=\ln \frac{p}{1-p}=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p$$
+
+### Odds Ratio
+$$\mathrm{OR}=\frac{P\left(y_1=1\right) / P\left(y_1=0\right)}{P\left(y_2=1\right) / P\left(y_2=0\right)}=e^\beta$$
+
+
+
+
+
+
+
 
 ## Running Code
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+### 如何在R中拟合回归
 
 ```{r}
-2+2
+data("ICU", package = "vcdExtra")
+help(ICU, package="vcdExtra")
+GLM1 <- glm(died~age+cancer+coma+systolic, family =binomial(link = logit), data = ICU)
+summary(GLM1)
+#作一个anova检验  
+anova(GLM1, test = 'LRT')
+#对样本发生概率的预测 
+predict(GLM1,type = 'response')
 ```
 
-You can add options to executable code like this
+### 有序的多分类变量
+
+使用累计逻辑斯蒂回归模型（POLR）
 
 ```{r}
-#| echo: false
-2 * 2
+library(MASS)
+library(tidyverse)
+data("housing")
+#多种指标对应三种满意度：low medium high
+glimpse(housing)
+#建立一个满意度和以下三种变量的公式
+house.fm1<- Sat~Infl+Type+Cont
+#将POLR放入模型，需要设定权重
+house.plr<-polr(
+  house.fm1,
+  weights = Freq, data=housing)
+summary(house.plr)
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+
+## Poisson Regression
+
+### 泊松分布
+泊松分布适合于描述单位时间内随机事件发生的次数。
+(1)泊松分布是一种描述和分析稀有事件的概率分布。要观察到这类事件，样本含量必须很大 。 
+(2)lambda是泊松分布所依赖的唯一参数。lambda值愈小，分布愈偏倚，随着lambda增大，分布趋于对称。 
+(3)当lambda=20时分布泊松分布接近于正态分布；当lambda=50时，可以认为泊松分布呈正态分布。 在实际工作中，当lambda大于等于20时就可以用正态分布来近似地处理泊松分布的问题。 
+
+$$
+f(y ; \lambda)=\frac{\lambda^y}{y!} e^{-\lambda}, y=0,1, \ldots
+$$
+### 泊松回归模型
+
+$$\begin{gathered}
+Y \sim \operatorname{Poisson}(\lambda), \\
+g(\lambda)=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p \\
+\text { 通常 } g(\lambda)=\ln \lambda
+\end{gathered}$$
+
+使用最大估计法
+
+$$
+\ell\left(\beta_0, \beta_1\right)=\text { 常数 }+\sum_{i=1}^n\left\{y_i\left(\beta_0+\mathbf{x}_{\mathbf{i}}^{\mathrm{T}} \beta\right)-e^{\beta_0+\mathbf{x}_1^{\mathrm{T}} \beta}\right\}
+$$
+若找到合适的数据集，可用GLM2 <- glm(A~B, family =poisson, data = C)
+summary(GLM2)
+但是我没找到
+
+
+
+
+
+
+
+
+

@@ -10,8 +10,8 @@ website:
         text: Home
       - href: edu.qmd
         text: Education
-    #  - href: basics.qmd
-    #    text: Basics
+      - href: ggplot2.qmd
+        text: Use of ggplot2
     #  - href: onelayernn.qmd
     #    text: Machine Learning Methods 
 format: 

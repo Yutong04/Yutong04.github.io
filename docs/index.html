@@ -101,6 +101,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -129,6 +158,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./edu.html"> 
 <span class="menu-text">Education</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ggplot2.html"> 
+<span class="menu-text">Use of ggplot2</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -145,8 +178,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto">Quarto</a></li>
-  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code">Running Code</a></li>
+  <li><a href="#about-glm" id="toc-about-glm" class="nav-link active" data-scroll-target="#about-glm">About glm</a>
+  <ul class="collapse">
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression">Linear regression</a></li>
+  <li><a href="#general-linear-regression" id="toc-general-linear-regression" class="nav-link" data-scroll-target="#general-linear-regression">General Linear Regression</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#odds-ratio" id="toc-odds-ratio" class="nav-link" data-scroll-target="#odds-ratio">Odds Ratio</a></li>
+  </ul></li>
+  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code">Running Code</a>
+  <ul class="collapse">
+  <li><a href="#如何在r中拟合回归" id="toc-如何在r中拟合回归" class="nav-link" data-scroll-target="#如何在r中拟合回归">如何在R中拟合回归</a></li>
+  <li><a href="#有序的多分类变量" id="toc-有序的多分类变量" class="nav-link" data-scroll-target="#有序的多分类变量">有序的多分类变量</a></li>
+  </ul></li>
+  <li><a href="#poisson-regression" id="toc-poisson-regression" class="nav-link" data-scroll-target="#poisson-regression">Poisson Regression</a>
+  <ul class="collapse">
+  <li><a href="#泊松分布" id="toc-泊松分布" class="nav-link" data-scroll-target="#泊松分布">泊松分布</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -172,28 +219,233 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="about-glm" class="level2">
+<h2 class="anchored" data-anchor-id="about-glm">About glm</h2>
+<section id="linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression">Linear regression</h3>
+<p><span class="math display">\[y=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p+\epsilon, \epsilon \sim N\left(0,
+\sigma^2\right)\]</span></p>
+</section>
+<section id="general-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="general-linear-regression">General Linear Regression</h3>
+<p><span class="math display">\[\begin{gathered}
+Y \mid x \sim F(y, \mu) \\
+g(\mu)=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p
+\end{gathered}\]</span></p>
+</section>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<p><span class="math display">\[\operatorname{logit}(p)=\ln \frac{p}{1-p}=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p\]</span></p>
+</section>
+<section id="odds-ratio" class="level3">
+<h3 class="anchored" data-anchor-id="odds-ratio">Odds Ratio</h3>
+<p><span class="math display">\[\mathrm{OR}=\frac{P\left(y_1=1\right) / P\left(y_1=0\right)}{P\left(y_2=1\right) / P\left(y_2=0\right)}=e^\beta\]</span></p>
+</section>
 </section>
 <section id="running-code" class="level2">
 <h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<section id="如何在r中拟合回归" class="level3">
+<h3 class="anchored" data-anchor-id="如何在r中拟合回归">如何在R中拟合回归</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ICU"</span>, <span class="at">package =</span> <span class="st">"vcdExtra"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(ICU, <span class="at">package=</span><span class="st">"vcdExtra"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>GLM1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(died<span class="sc">~</span>age<span class="sc">+</span>cancer<span class="sc">+</span>coma<span class="sc">+</span>systolic, <span class="at">family =</span><span class="fu">binomial</span>(<span class="at">link =</span> logit), <span class="at">data =</span> ICU)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(GLM1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<pre><code>
+Call:
+glm(formula = died ~ age + cancer + coma + systolic, family = binomial(link = logit), 
+    data = ICU)
+
+Coefficients:
+              Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)  -1.169893   1.183585  -0.988  0.32294   
+age           0.030189   0.012439   2.427  0.01522 * 
+cancerYes     0.640502   0.633115   1.012  0.31170   
+comaStupor   19.597055 931.997775   0.021  0.98322   
+comaComa      2.748841   0.872725   3.150  0.00163 **
+systolic     -0.019633   0.007039  -2.789  0.00529 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 200.16  on 199  degrees of freedom
+Residual deviance: 148.30  on 194  degrees of freedom
+AIC: 160.3
+
+Number of Fisher Scoring iterations: 15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#作一个anova检验  </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(GLM1, <span class="at">test =</span> <span class="st">'LRT'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: died
+
+Terms added sequentially (first to last)
+
+         Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+NULL                       199     200.16              
+age       1    7.855       198     192.31  0.005069 ** 
+cancer    1    0.012       197     192.29  0.911923    
+coma      2   35.389       195     156.91 2.068e-08 ***
+systolic  1    8.601       194     148.31  0.003360 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#对样本发生概率的预测 </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(GLM1,<span class="at">type =</span> <span class="st">'response'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         8         12         14         28         32         38         40 
+0.04137920 0.16971127 0.30817275 0.08886139 0.33112092 0.22330320 0.21251141 
+        41         42         50         51         53         58         61 
+0.04346268 0.09676696 0.24498135 0.03914470 0.09441218 0.08958199 0.06039463 
+        73         75         82         84         92         96         98 
+0.03835059 0.07275898 0.09464775 0.91816676 0.13475146 0.20549696 0.16843598 
+       100        102        111        112        136        137        143 
+0.08713349 0.06129916 0.03824173 0.18421751 0.04486168 0.09333556 0.09804790 
+       153        170        173        180        184        186        187 
+0.15730063 0.14308260 0.11685426 0.08787507 0.22064203 0.06449646 0.27758739 
+       190        191        207        211        214        219        225 
+0.15064622 0.08689866 0.12954666 0.07480760 0.29365095 0.08477825 0.18513833 
+       237        247        249        260        266        271        276 
+0.03279202 0.02951349 0.07954225 0.09235739 0.08178078 0.04549013 0.15295679 
+       277        278        282        292        295        297        298 
+0.20670610 0.09081203 0.32188289 0.33996878 0.29426445 0.18747429 0.08132226 
+       308        310        319        327        333        335        343 
+0.05327413 0.04527013 0.12483655 0.07176814 0.06672227 0.17528592 0.13129422 
+       357        362        365        369        370        371        376 
+0.10521551 0.22326680 0.08599804 0.21603027 0.12323078 0.15029440 0.03547734 
+       378        379        381        382        398        401        409 
+0.10899036 0.05596594 0.02218354 0.29545127 0.27211917 0.06232767 0.26207773 
+       413        416        438        439        440        455        462 
+0.12938009 0.06876231 0.12615720 0.05564338 0.17842026 0.28613463 0.11589920 
+       495        498        502        505        508        517        522 
+0.03586964 0.18692967 0.03769423 0.07483666 0.15853569 0.09086403 0.08765522 
+       525        526        546        548        550        552        560 
+0.09544660 0.35494937 0.33784090 0.08571613 0.24048158 0.06597683 0.09993077 
+       563        573        575        584        597        598        601 
+0.20203775 0.04618241 0.18194428 0.07321535 0.18012904 0.09674862 0.03939149 
+       605        607        619        620        639        644        645 
+0.18831327 0.16422097 0.10128710 0.14269488 0.21410410 0.23668469 0.01119594 
+       648        655        659        669        670        674        675 
+0.21148873 0.07999161 0.33586000 0.10989557 0.05107147 0.19671376 0.16051728 
+       676        709        713        727        728        732        746 
+0.04801074 0.35707871 0.05658271 0.15021480 0.04295651 0.12650661 0.30498617 
+       749        754        761        763        764        765        766 
+0.08910100 0.09887231 0.20449928 0.17102311 0.05255451 0.05178220 0.07871085 
+       772        776        784        794        796        809        814 
+0.08384873 0.06688037 0.16300747 0.06161594 0.08294539 0.06323433 0.17969292 
+       816        829        837        846        847        863        867 
+0.06181142 0.03212901 0.03882819 0.03476198 0.43458350 0.03466294 0.18558562 
+       875        877        880        881        889        893        906 
+0.08280115 0.09590362 0.05107147 0.63075050 0.18879765 0.07115189 0.07178213 
+       912        915        923        924        925        929          4 
+0.18831327 0.10607319 0.06862691 0.10464056 0.20553123 0.09135358 0.47150052 
+        27         47         52        127        145        154        165 
+0.19963196 0.20302649 0.18741131 0.03406054 0.40987058 0.07758609 0.30427109 
+       195        202        204        208        222        238        241 
+0.75768975 0.30628401 0.57951097 0.99999997 0.21728444 0.51700217 0.11134965 
+       273        285        299        331        346        380        384 
+0.32780949 0.16100104 0.99999999 0.94125733 0.11967137 0.03012421 0.14010642 
+       412        427        442        461        468        490        518 
+0.99999997 0.90425560 0.08132226 0.12957033 0.20166198 0.27392090 0.91277753 
+       611        613        666        671        706        740        751 
+0.21857971 0.18876551 0.81747986 0.08022490 0.71056387 0.31793293 0.89005663 
+       752        789        871        921 
+0.45810742 0.38745493 0.99999998 0.99999967 </code></pre>
 </div>
 </div>
-<p>You can add options to executable code like this</p>
+</section>
+<section id="有序的多分类变量" class="level3">
+<h3 class="anchored" data-anchor-id="有序的多分类变量">有序的多分类变量</h3>
+<p>使用累计逻辑斯蒂回归模型（POLR）</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+✖ dplyr::select() masks MASS::select()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"housing"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#多种指标对应三种满意度：low medium high</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<pre><code>Rows: 72
+Columns: 5
+$ Sat  &lt;ord&gt; Low, Medium, High, Low, Medium, High, Low, Medium, High, Low, Med…
+$ Infl &lt;fct&gt; Low, Low, Low, Medium, Medium, Medium, High, High, High, Low, Low…
+$ Type &lt;fct&gt; Tower, Tower, Tower, Tower, Tower, Tower, Tower, Tower, Tower, Ap…
+$ Cont &lt;fct&gt; Low, Low, Low, Low, Low, Low, Low, Low, Low, Low, Low, Low, Low, …
+$ Freq &lt;int&gt; 21, 21, 28, 34, 22, 36, 10, 11, 36, 61, 23, 17, 43, 35, 40, 26, 1…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#建立一个满意度和以下三种变量的公式</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>house.fm1<span class="ot">&lt;-</span> Sat<span class="sc">~</span>Infl<span class="sc">+</span>Type<span class="sc">+</span>Cont</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#将POLR放入模型，需要设定权重</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>house.plr<span class="ot">&lt;-</span><span class="fu">polr</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  house.fm1,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> Freq, <span class="at">data=</span>housing)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(house.plr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Re-fitting to get Hessian</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+polr(formula = house.fm1, data = housing, weights = Freq)
+
+Coefficients:
+                Value Std. Error t value
+InflMedium     0.5664    0.10465   5.412
+InflHigh       1.2888    0.12716  10.136
+TypeApartment -0.5724    0.11924  -4.800
+TypeAtrium    -0.3662    0.15517  -2.360
+TypeTerrace   -1.0910    0.15149  -7.202
+ContHigh       0.3603    0.09554   3.771
+
+Intercepts:
+            Value   Std. Error t value
+Low|Medium  -0.4961  0.1248    -3.9739
+Medium|High  0.6907  0.1255     5.5049
+
+Residual Deviance: 3479.149 
+AIC: 3495.149 </code></pre>
 </div>
 </div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+</section>
+</section>
+<section id="poisson-regression" class="level2">
+<h2 class="anchored" data-anchor-id="poisson-regression">Poisson Regression</h2>
+<section id="泊松分布" class="level3">
+<h3 class="anchored" data-anchor-id="泊松分布">泊松分布</h3>
+<p>泊松分布适合于描述单位时间内随机事件发生的次数。 (1)泊松分布是一种描述和分析稀有事件的概率分布。要观察到这类事件，样本含量必须很大 。 (2)lambda是泊松分布所依赖的唯一参数。lambda值愈小，分布愈偏倚，随着lambda增大，分布趋于对称。 (3)当lambda=20时分布泊松分布接近于正态分布；当lambda=50时，可以认为泊松分布呈正态分布。 在实际工作中，当lambda大于等于20时就可以用正态分布来近似地处理泊松分布的问题。</p>
+<p><span class="math display">\[
+f(y ; \lambda)=\frac{\lambda^y}{y!} e^{-\lambda}, y=0,1, \ldots
+\]</span> ### 泊松回归模型</p>
+<p><span class="math display">\[\begin{gathered}
+Y \sim \operatorname{Poisson}(\lambda), \\
+g(\lambda)=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p \\
+\text { 通常 } g(\lambda)=\ln \lambda
+\end{gathered}\]</span></p>
+<p>使用最大估计法</p>
+<p><span class="math display">\[
+\ell\left(\beta_0, \beta_1\right)=\text { 常数 }+\sum_{i=1}^n\left\{y_i\left(\beta_0+\mathbf{x}_{\mathbf{i}}^{\mathrm{T}} \beta\right)-e^{\beta_0+\mathbf{x}_1^{\mathrm{T}} \beta}\right\}
+\]</span> 若找到合适的数据集，可用GLM2 &lt;- glm(A~B, family =poisson, data = C) summary(GLM2) 但是我没找到</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
