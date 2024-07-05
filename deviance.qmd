@@ -1,0 +1,40 @@
+---
+title: "What is deviance"
+editor: visual
+---
+
+## About Deviance
+
+如果我们使用广义线性模型(GLM)对关系进行建模，偏差是对拟合优度的度量:偏差越小，拟合越好。
+
+偏差可以看作是线性模型中残差平方和的推广。
+
+The exact definition of deviance is as follows: for a particular GLM (denoted $\mathcal{M}$ ), let $L_{\mathcal{M}}$ denote the maximum achievable likelihood under this model. Let $L_{\mathcal{S}}$ denote the likelihood under the "saturated model". Then the deviance of the GLM is defined as
+$$
+D_{\mathcal{M}}=-2 \log \left(\frac{L_{\mathcal{M}}}{L_{\mathcal{S}}}\right)=-2\left(\log L_{\mathcal{M}}-\log L_{\mathcal{S}}\right)
+$$
+
+## What is saturated model
+
+“最一般的模型，每个观测值都有一个单独的参数，并且完全拟合”。换句话说，它是一个完全拟合观察响应的模型。在所有可能的模型中，饱和模型具有最大可实现的对数似然值。
+
+## How do we use deviance to test for goodness of it?
+
+我们如何使用偏差来检验拟合优度？宽泛地说，我们是在检验原假设$\mathcal{M}_0$是一个好的拟合，$\mathcal{M}_1$是一个更好的拟合。检验统计量是偏差的差值：
+
+$$\begin{aligned}
+D & =D_{\mathcal{M}_0}-D_{\mathcal{M}_1} \\
+& =-2\left(\log L_{\mathcal{M}_0}-\log L_{\mathcal{S}}\right)+2\left(\log L_{\mathcal{M}_1}-\log L_{\mathcal{S}}\right) \\
+& =-2\left(\log L_{\mathcal{M}_0}-\log L_{\mathcal{M}_1}\right) .
+\end{aligned}$$
+
+## What is maximum achievable likelihood
+
+likelihood指的是在给定一组参数的情况下，观察到特定数据的概率。它是一个用来衡量参数估计准确性的指标。
+在最大似然估计中，我们试图找到使得likelihood函数取得最大值的参数值，从而得到对参数的估计。
+概率是描述已知参数情况下事件发生的可能性，而likelihood是描述已知观察到的结果情况下参数取值的可能性。
+
+## What is likehood ratio test(LRT)
+
+似然比检验（Likelihood Ratio Test）是一种假设检验方法，用于比较两个模型的拟合优度，即评估哪个模型更能解释观察到的数据。
+

@@ -1,12 +1,12 @@
 ---
-title: "Use os ggplot2"
+title: "Use of ggplot2"
 editor: visual
 ---
 
 ## ggplot 语法结构
 
 ggplot2 is  an open-source data visualization package for the statistical programming lauguage R.
-aes: aestheticmapping(美学映射)
+
 
 ```{r}
 library(ggplot2)

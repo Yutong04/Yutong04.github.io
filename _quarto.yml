@@ -12,8 +12,8 @@ website:
     #    text: Education
       - href: ggplot2.qmd
         text: Use of ggplot2
-    #  - href: onelayernn.qmd
-    #    text: Machine Learning Methods 
+      - href: deviance.qmd
+        text: What is deviance 
 format: 
   html: 
     theme: cosmo

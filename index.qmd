@@ -20,14 +20,6 @@ $$\operatorname{logit}(p)=\ln \frac{p}{1-p}=\beta_0+\beta_1 x_1+\cdots+\beta_p x
 
 ### Odds Ratio
 $$\mathrm{OR}=\frac{P\left(y_1=1\right) / P\left(y_1=0\right)}{P\left(y_2=1\right) / P\left(y_2=0\right)}=e^\beta$$
-
-
-
-
-
-
-
-
 ## Running Code
 
 ### 如何在R中拟合回归
@@ -68,8 +60,8 @@ summary(house.plr)
 ### 泊松分布
 泊松分布适合于描述单位时间内随机事件发生的次数。
 (1)泊松分布是一种描述和分析稀有事件的概率分布。要观察到这类事件，样本含量必须很大 。 
-(2)lambda是泊松分布所依赖的唯一参数。lambda值愈小，分布愈偏倚，随着lambda增大，分布趋于对称。 
-(3)当lambda=20时分布泊松分布接近于正态分布；当lambda=50时，可以认为泊松分布呈正态分布。 在实际工作中，当lambda大于等于20时就可以用正态分布来近似地处理泊松分布的问题。 
+(2)${\lambda}$是泊松分布所依赖的唯一参数。${\lambda}$值愈小，分布愈偏倚，随着${\lambda}$增大，分布趋于对称。 
+(3)当${\lambda}$=20时分布泊松分布接近于正态分布；当${\lambda}$=50时，可以认为泊松分布呈正态分布。 在实际工作中，当${\lambda}$大于等于20时就可以用正态分布来近似地处理泊松分布的问题。 
 
 $$
 f(y ; \lambda)=\frac{\lambda^y}{y!} e^{-\lambda}, y=0,1, \ldots
@@ -90,7 +82,7 @@ $$
 $$
 若找到合适的数据集，可用GLM2 <- glm(A~B, family =poisson, data = C)
 summary(GLM2)
-但是我没找到
+
 
 
 
