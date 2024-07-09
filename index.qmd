@@ -18,8 +18,7 @@ g(\mu)=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p
 ### Logistic Regression
 $$\operatorname{logit}(p)=\ln \frac{p}{1-p}=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p$$
 
-### Odds Ratio
-$$\mathrm{OR}=\frac{P\left(y_1=1\right) / P\left(y_1=0\right)}{P\left(y_2=1\right) / P\left(y_2=0\right)}=e^\beta$$
+
 ## Running Code
 
 ### 如何在R中拟合回归
