@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Use of glm – Yutong Homepage</title>
+<title>Survival Analysis in Poisoning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,7 +58,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -74,11 +73,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -101,76 +100,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-fixed">
+<body>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Yutong Homepage</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Use of glm</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./ggplot2.html"> 
-<span class="menu-text">Use of ggplot2</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./deviance.html"> 
-<span class="menu-text">What is deviance</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -178,21 +115,20 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#about-glm" id="toc-about-glm" class="nav-link active" data-scroll-target="#about-glm">About glm</a>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a>
   <ul class="collapse">
-  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression">Linear regression</a></li>
-  <li><a href="#general-linear-regression" id="toc-general-linear-regression" class="nav-link" data-scroll-target="#general-linear-regression">General Linear Regression</a></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#statistical-analysis" id="toc-statistical-analysis" class="nav-link" data-scroll-target="#statistical-analysis">Statistical Analysis</a></li>
+  <li><a href="#model-1-penalized-cox-regression---lasso" id="toc-model-1-penalized-cox-regression---lasso" class="nav-link" data-scroll-target="#model-1-penalized-cox-regression---lasso">Model 1: Penalized Cox Regression - Lasso</a></li>
+  <li><a href="#model-2-cox-proportional-hazards-coxph---backward-selection" id="toc-model-2-cox-proportional-hazards-coxph---backward-selection" class="nav-link" data-scroll-target="#model-2-cox-proportional-hazards-coxph---backward-selection">Model 2 : Cox Proportional Hazards (coxph) - Backward Selection</a></li>
   </ul></li>
-  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code">Running Code</a>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a>
   <ul class="collapse">
-  <li><a href="#如何在r中拟合回归" id="toc-如何在r中拟合回归" class="nav-link" data-scroll-target="#如何在r中拟合回归">如何在R中拟合回归</a></li>
-  <li><a href="#有序的多分类变量" id="toc-有序的多分类变量" class="nav-link" data-scroll-target="#有序的多分类变量">有序的多分类变量</a></li>
-  </ul></li>
-  <li><a href="#poisson-regression" id="toc-poisson-regression" class="nav-link" data-scroll-target="#poisson-regression">Poisson Regression</a>
-  <ul class="collapse">
-  <li><a href="#泊松分布" id="toc-泊松分布" class="nav-link" data-scroll-target="#泊松分布">泊松分布</a></li>
-  <li><a href="#泊松回归模型" id="toc-泊松回归模型" class="nav-link" data-scroll-target="#泊松回归模型">泊松回归模型</a></li>
+  <li><a href="#codes-for-model-1-penalized-cox-regression---lasso" id="toc-codes-for-model-1-penalized-cox-regression---lasso" class="nav-link" data-scroll-target="#codes-for-model-1-penalized-cox-regression---lasso">1. Codes for Model 1: Penalized Cox Regression - Lasso</a></li>
+  <li><a href="#codes-for-model-2-cox-proportional-hazards-coxph---backward-selection" id="toc-codes-for-model-2-cox-proportional-hazards-coxph---backward-selection" class="nav-link" data-scroll-target="#codes-for-model-2-cox-proportional-hazards-coxph---backward-selection">2. Codes for Model 2 : Cox Proportional Hazards (coxph) - Backward Selection</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -202,7 +138,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Use of glm</h1>
+<h1 class="title">Survival Analysis in Poisoning</h1>
 </div>
 
 
@@ -219,229 +155,444 @@ window.Quarto = {
 </header>
 
 
-<section id="about-glm" class="level2">
-<h2 class="anchored" data-anchor-id="about-glm">About glm</h2>
-<section id="linear-regression" class="level3">
-<h3 class="anchored" data-anchor-id="linear-regression">Linear regression</h3>
-<p><span class="math display">\[y=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p+\epsilon, \epsilon \sim N\left(0,
-\sigma^2\right)\]</span></p>
+<section id="abstract" class="level1">
+<h1>Abstract</h1>
+<p>Pesticide poisoning remains a significant public health concern worldwide, particularly in developing regions where regulatory controls are less stringent. Each year, millions of cases arise from the misuse, overuse, or intentional ingestion of pesticides, presenting substantial threats to individual health and imposing significant burdens on public health systems. This study analyzed a cohort of hospitalized pesticide poisoning patients, collecting important demographic, clinical, and biochemical variables. Using the methods of Cox-Lasso and backward Cox, the most relevant variables were identified, analyzed, and interpreted. The findings revealed several important factors related to the survival outcomes of pesticide poisoning cases, including cardiopulmonary resuscitation (CPR), intubation or ventilation, vasoactive drugs, age and the dosage of the ingested liquid, and obtained a well-fitting model: sex + CPR + intubation_or_ventilation + vasoactive_drugs + dosage_liquid_1 + age. These factors are relatively significant in variable selection, providing important insights into patient management and intervention strategies.</p>
 </section>
-<section id="general-linear-regression" class="level3">
-<h3 class="anchored" data-anchor-id="general-linear-regression">General Linear Regression</h3>
-<p><span class="math display">\[\begin{gathered}
-Y \mid x \sim F(y, \mu) \\
-g(\mu)=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p
-\end{gathered}\]</span></p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Survival analysis (D. R. Cox and Oakes 1984) involves information of manipulating covariates based on time-to-event. (David R. Cox 1972) introduces the well-known Cox model, which is highly suitable for predicting outcomes in cases of organophosphate pesticide poisoning. This model’s ability to handle censored data and its flexibility in incorporating various covariates make it particularly effective in medical research. Although the survival times of those who succumb to organophosphate poisoning are often similar, the Cox model allows for a nuanced analysis that goes beyond mere survival times. This capability is invaluable to doctors who are more interested in understanding the factors that influence patient outcomes.</p>
 </section>
-<section id="logistic-regression" class="level3">
-<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
-<p><span class="math display">\[\operatorname{logit}(p)=\ln \frac{p}{1-p}=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p\]</span></p>
+<section id="methodology" class="level1">
+<h1>Methodology</h1>
+<p>The flowchart in Figure1 illustrates the methodology for data cleaning and variable selection in survival analysis. Initially, the dataset comprised 450 observations. Following the removal of 131 deficient records, 319 cleaned observations remained. Two modeling approaches were employed to achieve optimal variable selection: Penalized Cox Regression (Lasso) and Cox Proportional Hazards (coxph) with backward selection. These methods were utilized to identify the most significant predictors for survival outcomes, ensuring a robust and accurate analysis.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="f1.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Methodology for Data Cleaning and Variable Selection in Survival Analysis</figcaption>
+</figure>
+</div>
+<section id="statistical-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-analysis">Statistical Analysis</h2>
+<p>The dataset used in this study exclusively comprises organophosphate insecticides. This figure2 presents the survival outcomes for several organophosphate pesticide samples. Each pesticide type has a sample size greater than 30. The X-axis represents different types of pesticides (such as Chlorpyrifos, Dichlorvos, Dimethoate, and Methamidophos), and the Y-axis indicates the corresponding number of cases.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="f2.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure2: Relationships between Toxins and Survival Outcomes</figcaption>
+</figure>
+</div>
 </section>
+<section id="model-1-penalized-cox-regression---lasso" class="level2">
+<h2 class="anchored" data-anchor-id="model-1-penalized-cox-regression---lasso">Model 1: Penalized Cox Regression - Lasso</h2>
+<p>Lasso&nbsp;is particularly suitable for handling data with a large number of potential predictor variables by penalizing the coefficients of less important variables, effectively shrinking them towards zero (Tibshirani 1996). We use cross-validation (10 folds) to find the minimum average MSE to fix the best penalized cox regression-lasso model and then interpret important variables in it.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="f3.jpg" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: Coefficients of Important Variables</figcaption>
+</figure>
+</div>
+<p><strong>Interpretations of Harmful Variables Identified By Lasso for the Patients Survival:</strong></p>
+<ol type="1">
+<li><p>CPR : Firstly, CPR has inherent limitations. As E Özer et al.&nbsp;(2010) note, without improved diagnosis and treatment (Eddleston et al.&nbsp;,2008), CPR can lead to suboptimal outcomes. Secondly, the harm attributed to CPR may stem from patients’ severe conditions, often worsened by factors such as old age, which Lasso and Cox models highlight. Additionally,E Özer et al.&nbsp;(2010) mention that intubation or ventilation preceding CPR might increase negative outcomes. Therefore, the combined effects of these factors, rather than CPR alone, make it appear harmful to survival.</p></li>
+<li><p>intubation_or_ventilation: Intubation refers to the insertion of a plastic tube into the body, usually through the mouth. As one of the cornerstones of anesthesiology, tracheal intubation and ventilation are significant in affecting patients’ survival outcomes (Lovich-Sapola, J. A. et al., 2023). However, complications like aspiration, infections, and injury are likely to be caused during intubation, which increase the risk of patient death.</p></li>
+<li><p>vasoactive_drugs: According to some previous articles, vasoactive drugs are commonly used when the condition of patients is very serious&nbsp;(Wirth and Heidrich, 2012). When the cardiovascular system fails, which is a complication of pesticide poisoning, treatment with vasoactive drugs should commence if the common operation of the fluid therapy does not work(Hollenberg, 2011).</p></li>
+<li><p>age: Consistent with Firouzeh et al.&nbsp;(2022) , age as an important variable is related to higher risk of death in pesticide intoxication. For instance, older individuals might have preexisting health conditions or a weakened immune system that exacerbates the effects of pesticide exposure.</p></li>
+</ol>
 </section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<section id="如何在r中拟合回归" class="level3">
-<h3 class="anchored" data-anchor-id="如何在r中拟合回归">如何在R中拟合回归</h3>
+<section id="model-2-cox-proportional-hazards-coxph---backward-selection" class="level2">
+<h2 class="anchored" data-anchor-id="model-2-cox-proportional-hazards-coxph---backward-selection">Model 2 : Cox Proportional Hazards (coxph) - Backward Selection</h2>
+<p><strong>“sex + CPR + intubation_or_ventilation + vasoactive_drugs + ECTR + dosage_liquid_1 + age”</strong></p>
+<p>In Model 2, we adopt backward cox model to gradually remove the insignificant variables from the initial full model, in order to simplify the model and improve the prediction performance. By removing the variables step by step, we find the combination of variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ICU"</span>, <span class="at">package =</span> <span class="st">"vcdExtra"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(ICU, <span class="at">package=</span><span class="st">"vcdExtra"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>GLM1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(died<span class="sc">~</span>age<span class="sc">+</span>cancer<span class="sc">+</span>coma<span class="sc">+</span>systolic, <span class="at">family =</span><span class="fu">binomial</span>(<span class="at">link =</span> logit), <span class="at">data =</span> ICU)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(GLM1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">'sex + CPR + intubation_or_ventilation + vasoactive_drugs + dosage_liquid_1 + age'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = died ~ age + cancer + coma + systolic, family = binomial(link = logit), 
-    data = ICU)
-
-Coefficients:
-              Estimate Std. Error z value Pr(&gt;|z|)   
-(Intercept)  -1.169893   1.183585  -0.988  0.32294   
-age           0.030189   0.012439   2.427  0.01522 * 
-cancerYes     0.640502   0.633115   1.012  0.31170   
-comaStupor   19.597055 931.997775   0.021  0.98322   
-comaComa      2.748841   0.872725   3.150  0.00163 **
-systolic     -0.019633   0.007039  -2.789  0.00529 **
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 200.16  on 199  degrees of freedom
-Residual deviance: 148.30  on 194  degrees of freedom
-AIC: 160.3
-
-Number of Fisher Scoring iterations: 15</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#作一个anova检验  </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(GLM1, <span class="at">test =</span> <span class="st">'LRT'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Deviance Table
-
-Model: binomial, link: logit
-
-Response: died
-
-Terms added sequentially (first to last)
-
-         Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
-NULL                       199     200.16              
-age       1    7.855       198     192.31  0.005069 ** 
-cancer    1    0.012       197     192.29  0.911923    
-coma      2   35.389       195     156.91 2.068e-08 ***
-systolic  1    8.601       194     148.31  0.003360 ** 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#对样本发生概率的预测 </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(GLM1,<span class="at">type =</span> <span class="st">'response'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         8         12         14         28         32         38         40 
-0.04137920 0.16971127 0.30817275 0.08886139 0.33112092 0.22330320 0.21251141 
-        41         42         50         51         53         58         61 
-0.04346268 0.09676696 0.24498135 0.03914470 0.09441218 0.08958199 0.06039463 
-        73         75         82         84         92         96         98 
-0.03835059 0.07275898 0.09464775 0.91816676 0.13475146 0.20549696 0.16843598 
-       100        102        111        112        136        137        143 
-0.08713349 0.06129916 0.03824173 0.18421751 0.04486168 0.09333556 0.09804790 
-       153        170        173        180        184        186        187 
-0.15730063 0.14308260 0.11685426 0.08787507 0.22064203 0.06449646 0.27758739 
-       190        191        207        211        214        219        225 
-0.15064622 0.08689866 0.12954666 0.07480760 0.29365095 0.08477825 0.18513833 
-       237        247        249        260        266        271        276 
-0.03279202 0.02951349 0.07954225 0.09235739 0.08178078 0.04549013 0.15295679 
-       277        278        282        292        295        297        298 
-0.20670610 0.09081203 0.32188289 0.33996878 0.29426445 0.18747429 0.08132226 
-       308        310        319        327        333        335        343 
-0.05327413 0.04527013 0.12483655 0.07176814 0.06672227 0.17528592 0.13129422 
-       357        362        365        369        370        371        376 
-0.10521551 0.22326680 0.08599804 0.21603027 0.12323078 0.15029440 0.03547734 
-       378        379        381        382        398        401        409 
-0.10899036 0.05596594 0.02218354 0.29545127 0.27211917 0.06232767 0.26207773 
-       413        416        438        439        440        455        462 
-0.12938009 0.06876231 0.12615720 0.05564338 0.17842026 0.28613463 0.11589920 
-       495        498        502        505        508        517        522 
-0.03586964 0.18692967 0.03769423 0.07483666 0.15853569 0.09086403 0.08765522 
-       525        526        546        548        550        552        560 
-0.09544660 0.35494937 0.33784090 0.08571613 0.24048158 0.06597683 0.09993077 
-       563        573        575        584        597        598        601 
-0.20203775 0.04618241 0.18194428 0.07321535 0.18012904 0.09674862 0.03939149 
-       605        607        619        620        639        644        645 
-0.18831327 0.16422097 0.10128710 0.14269488 0.21410410 0.23668469 0.01119594 
-       648        655        659        669        670        674        675 
-0.21148873 0.07999161 0.33586000 0.10989557 0.05107147 0.19671376 0.16051728 
-       676        709        713        727        728        732        746 
-0.04801074 0.35707871 0.05658271 0.15021480 0.04295651 0.12650661 0.30498617 
-       749        754        761        763        764        765        766 
-0.08910100 0.09887231 0.20449928 0.17102311 0.05255451 0.05178220 0.07871085 
-       772        776        784        794        796        809        814 
-0.08384873 0.06688037 0.16300747 0.06161594 0.08294539 0.06323433 0.17969292 
-       816        829        837        846        847        863        867 
-0.06181142 0.03212901 0.03882819 0.03476198 0.43458350 0.03466294 0.18558562 
-       875        877        880        881        889        893        906 
-0.08280115 0.09590362 0.05107147 0.63075050 0.18879765 0.07115189 0.07178213 
-       912        915        923        924        925        929          4 
-0.18831327 0.10607319 0.06862691 0.10464056 0.20553123 0.09135358 0.47150052 
-        27         47         52        127        145        154        165 
-0.19963196 0.20302649 0.18741131 0.03406054 0.40987058 0.07758609 0.30427109 
-       195        202        204        208        222        238        241 
-0.75768975 0.30628401 0.57951097 0.99999997 0.21728444 0.51700217 0.11134965 
-       273        285        299        331        346        380        384 
-0.32780949 0.16100104 0.99999999 0.94125733 0.11967137 0.03012421 0.14010642 
-       412        427        442        461        468        490        518 
-0.99999997 0.90425560 0.08132226 0.12957033 0.20166198 0.27392090 0.91277753 
-       611        613        666        671        706        740        751 
-0.21857971 0.18876551 0.81747986 0.08022490 0.71056387 0.31793293 0.89005663 
-       752        789        871        921 
-0.45810742 0.38745493 0.99999998 0.99999967 </code></pre>
+<pre><code>[1] "sex + CPR + intubation_or_ventilation + vasoactive_drugs + dosage_liquid_1 + age"</code></pre>
 </div>
 </div>
-</section>
-<section id="有序的多分类变量" class="level3">
-<h3 class="anchored" data-anchor-id="有序的多分类变量">有序的多分类变量</h3>
-<p>使用累计逻辑斯蒂回归模型（POLR）</p>
+<p>has the best fitting effect and has the smallest AIC of 284.2628.</p>
+<p>In detail, we imported all the numerical and bivariate variables in the table, and cox fitted the full model after white space cleaning and factor conversion of the data. The optimal combination is then selected using a simplified stepwise regression model.</p>
+<p>Since the literature has proved that ECTR has a significant impact on survival outcomes, we add ECTR to the known optimal model. In order to make a more intuitive comparison, we list the top 10 combinations of AIC values from small to large in the selection process. The combination after joining ECTR ranks 6th. Then we get the model as the following: the variables step by step, we find the combination of variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">'sex + CPR + intubation_or_ventilation + vasoactive_drugs + ECTR + dosage_liquid_1 + age'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sex + CPR + intubation_or_ventilation + vasoactive_drugs + ECTR + dosage_liquid_1 + age"</code></pre>
+</div>
+</div>
+<p>In this variable combination, the AIC is 285.5909. This is the best fit we get.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This study focuses on exploring the key factors affecting the survival outcomes of pesticide poisoning patients. By employing the method of Cox-Lasso and backward Cox, we effectively identified and analyzed the relevant variables. The results indicate that cardiopulmonary resuscitation (CPR), intubation or ventilation, vasopressors, age, and the dose of ingested fluids are important predictors of survival. The well-fitting model obtained includes gender, CPR, intubation or ventilation, vasopressors, dose of ingested fluids, and age, providing a robust framework for understanding the dynamics of pesticide poisoning outcomes. In summary, these key factors provide important evidence for optimizing treatment plans for patients with organophosphate pesticide poisoning.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p>Cox, D. R., &amp; Oakes, D. (1984). Analysis of survival data (Vol. 21). CRC Press.</p>
+<p>Cox, D. R. (1972). Regression models and life-tables. Journal of the Royal Statistical Society: Series B (Methodological), 34(2), 187–202.</p>
+<p>Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 58(1), 267–288.</p>
+<p>Eddleston, M., Buckley, N. A., Eyer, P., &amp; Dawson, A. H. (2008). Management of acute organophosphorus pesticide poisoning. Lancet, 371(9612), 597. https://doi.org/10.1016/S0140-6736(07)61202-1</p>
+<p>Özer, E., Şam, B., Tokdemir, M. B., &amp; Çetin, G. (2010). Complications of cardiopulmonary resuscitation.&nbsp;Cumhuriyet Medical Journal,&nbsp;32(3), 315-322. Lovich-Sapola, J. A. et al.&nbsp;(2023). Advances in tracheal intubation. IntechOpen. Firouzeh, N. et al.&nbsp;(2022) ‘Role of age-sex as underlying risk factors for death in acute pesticide self-poisoning: a prospective cohort study’, Clinical Toxicology (15563650), 60(2), pp.&nbsp;184-190. doi: 10.1080/15563650.2021.1921186</p>
+</section>
+<section id="appendix" class="level1">
+<h1>Appendix</h1>
+<section id="codes-for-model-1-penalized-cox-regression---lasso" class="level2">
+<h2 class="anchored" data-anchor-id="codes-for-model-1-penalized-cox-regression---lasso">1. Codes for Model 1: Penalized Cox Regression - Lasso</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ dplyr::select() masks MASS::select()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre><code>Loading required package: Matrix</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"housing"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#多种指标对应三种满意度：low medium high</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 72
-Columns: 5
-$ Sat  &lt;ord&gt; Low, Medium, High, Low, Medium, High, Low, Medium, High, Low, Med…
-$ Infl &lt;fct&gt; Low, Low, Low, Medium, Medium, Medium, High, High, High, Low, Low…
-$ Type &lt;fct&gt; Tower, Tower, Tower, Tower, Tower, Tower, Tower, Tower, Tower, Ap…
-$ Cont &lt;fct&gt; Low, Low, Low, Low, Low, Low, Low, Low, Low, Low, Low, Low, Low, …
-$ Freq &lt;int&gt; 21, 21, 28, 34, 22, 36, 10, 11, 36, 61, 23, 17, 43, 35, 40, 26, 1…</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loaded glmnet 4.1-8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#建立一个满意度和以下三种变量的公式</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>house.fm1<span class="ot">&lt;-</span> Sat<span class="sc">~</span>Infl<span class="sc">+</span>Type<span class="sc">+</span>Cont</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#将POLR放入模型，需要设定权重</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>house.plr<span class="ot">&lt;-</span><span class="fu">polr</span>(</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  house.fm1,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> Freq, <span class="at">data=</span>housing)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(house.plr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-Re-fitting to get Hessian</code></pre>
+Attaching package: 'dplyr'</code></pre>
 </div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Hmisc'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:dplyr':
+
+    src, summarize</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    format.pval, units</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="st">"/Users/liyutong/Desktop/Yutong04.github.io/Book2.xlsx"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>train_df <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(data_path, <span class="at">skip =</span> <span class="dv">1</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">537</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>numeric_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dosage_liquid_1"</span>, <span class="st">"age"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>binary_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"mental_health_illness"</span>, <span class="st">"hypertension"</span>, <span class="st">"history_of_past_mental_health_disease"</span>, </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"airway"</span>, <span class="st">"CPR"</span>, <span class="st">"intubation_or_ventilation"</span>, <span class="st">"induced_vomiting_or_catharsis"</span>, </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"vasoactive_drugs"</span>, <span class="st">"activated_carbon"</span>, <span class="st">"gastric_lavage"</span>, <span class="st">"ECTR"</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>train_df <span class="ot">&lt;-</span> train_df <span class="sc">%&gt;%</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(binary_vars), <span class="fu">all_of</span>(numeric_vars), <span class="st">"survival_time"</span>, <span class="st">"censor"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>train_df <span class="ot">&lt;-</span> train_df <span class="sc">%&gt;%</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(binary_vars), as.factor))</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>cols_with_one_level <span class="ot">&lt;-</span> <span class="fu">sapply</span>(train_df, <span class="cf">function</span>(col) <span class="fu">is.factor</span>(col) <span class="sc">&amp;&amp;</span> <span class="fu">length</span>(<span class="fu">unique</span>(col)) <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>cols_with_one_level_names <span class="ot">&lt;-</span> <span class="fu">names</span>(cols_with_one_level[cols_with_one_level])</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>train_df <span class="ot">&lt;-</span> train_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">one_of</span>(cols_with_one_level_names))</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cols_with_one_level_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Call:
-polr(formula = house.fm1, data = housing, weights = Freq)
-
-Coefficients:
-                Value Std. Error t value
-InflMedium     0.5664    0.10465   5.412
-InflHigh       1.2888    0.12716  10.136
-TypeApartment -0.5724    0.11924  -4.800
-TypeAtrium    -0.3662    0.15517  -2.360
-TypeTerrace   -1.0910    0.15149  -7.202
-ContHigh       0.3603    0.09554   3.771
-
-Intercepts:
-            Value   Std. Error t value
-Low|Medium  -0.4961  0.1248    -3.9739
-Medium|High  0.6907  0.1255     5.5049
-
-Residual Deviance: 3479.149 
-AIC: 3495.149 </code></pre>
+<pre><code>character(0)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> . <span class="sc">-</span> survival_time <span class="sc">-</span> censor, <span class="at">data =</span> train_df)[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">Surv</span>(train_df<span class="sc">$</span>survival_time, train_df<span class="sc">$</span>censor)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># cross-validation for choosing the best lambda</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>cv_glmnet_fit <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x, y, <span class="at">family =</span> <span class="st">"cox"</span>, <span class="at">alpha =</span> <span class="dv">1</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>best_lambda <span class="ot">&lt;-</span> cv_glmnet_fit<span class="sc">$</span>lambda.min</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Best lambda: "</span>, best_lambda, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best lambda:  0.03494072 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fix cox+lasoo</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>glmnet_fit <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x, y, <span class="at">family =</span> <span class="st">"cox"</span>, <span class="at">lambda =</span> best_lambda)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>glmnet_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(glmnet_fit)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>glmnet_coef <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef =</span> <span class="fu">rownames</span>(glmnet_coef),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="fu">as.vector</span>(glmnet_coef),</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>non_zero_coef <span class="ot">&lt;-</span> glmnet_coef <span class="sc">%&gt;%</span> <span class="fu">filter</span>(value <span class="sc">!=</span> <span class="dv">0</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(non_zero_coef)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          coef       value
+1                       CPRYes 0.988371505
+2 intubation_or_ventilationYes 0.902640320
+3          vasoactive_drugsYes 0.821086422
+4              dosage_liquid_1 0.002684902
+5                          age 0.017686606</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C-index(rcorr.cens package uses 1-c_index for printing)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>risk_scores <span class="ot">&lt;-</span> <span class="fu">predict</span>(glmnet_fit, <span class="at">newx =</span> x, <span class="at">type =</span> <span class="st">"link"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>c_index <span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span> <span class="fu">rcorr.cens</span>(risk_scores, y)[<span class="st">"C Index"</span>]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"C-index: "</span>, c_index, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>C-index:  0.909835 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(non_zero_coef, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(coef, value), <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Coefficients of Important Variables"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Variables"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Coefficient Value"</span>) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
 </section>
-</section>
-<section id="poisson-regression" class="level2">
-<h2 class="anchored" data-anchor-id="poisson-regression">Poisson Regression</h2>
-<section id="泊松分布" class="level3">
-<h3 class="anchored" data-anchor-id="泊松分布">泊松分布</h3>
-<p>泊松分布适合于描述单位时间内随机事件发生的次数。 (1)泊松分布是一种描述和分析稀有事件的概率分布。要观察到这类事件，样本含量必须很大 。 (2)<span class="math inline">\({\lambda}\)</span>是泊松分布所依赖的唯一参数。<span class="math inline">\({\lambda}\)</span>值愈小，分布愈偏倚，随着<span class="math inline">\({\lambda}\)</span>增大，分布趋于对称。 (3)当<span class="math inline">\({\lambda}\)</span>=20时分布泊松分布接近于正态分布；当<span class="math inline">\({\lambda}\)</span>=50时，可以认为泊松分布呈正态分布。 在实际工作中，当<span class="math inline">\({\lambda}\)</span>大于等于20时就可以用正态分布来近似地处理泊松分布的问题。</p>
-<p><span class="math display">\[
-f(y ; \lambda)=\frac{\lambda^y}{y!} e^{-\lambda}, y=0,1, \ldots
-\]</span></p>
-</section>
-<section id="泊松回归模型" class="level3">
-<h3 class="anchored" data-anchor-id="泊松回归模型">泊松回归模型</h3>
-<p><span class="math display">\[\begin{gathered}
-Y \sim \operatorname{Poisson}(\lambda), \\
-g(\lambda)=\beta_0+\beta_1 x_1+\cdots+\beta_p x_p \\
-\text { 通常 } g(\lambda)=\ln \lambda
-\end{gathered}\]</span></p>
-<p>使用最大估计法</p>
-<p><span class="math display">\[
-\ell\left(\beta_0, \beta_1\right)=\text { 常数 }+\sum_{i=1}^n\left\{y_i\left(\beta_0+\mathbf{x}_{\mathbf{i}}^{\mathrm{T}} \beta\right)-e^{\beta_0+\mathbf{x}_1^{\mathrm{T}} \beta}\right\}
-\]</span> 若找到合适的数据集，可用GLM2 &lt;- glm(A~B, family =poisson, data = C) summary(GLM2)</p>
+<section id="codes-for-model-2-cox-proportional-hazards-coxph---backward-selection" class="level2">
+<h2 class="anchored" data-anchor-id="codes-for-model-2-cox-proportional-hazards-coxph---backward-selection">2. Codes for Model 2 : Cox Proportional Hazards (coxph) - Backward Selection</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载必要的包</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)  <span class="co"># 用于Cox回归模型</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)  <span class="co"># 用于计算C-index</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 读取数据</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/liyutong/Desktop/Yutong04.github.io/Book2.xlsx"</span>, <span class="at">skip =</span> <span class="dv">1</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义新的数值变量和二值变量</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>numeric_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dosage_liquid_1"</span>, <span class="st">"age"</span>)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>binary_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sex"</span>, <span class="st">"mental_health_illness"</span>, <span class="st">"hypertension"</span>, <span class="st">"history_of_past_mental_health_disease"</span>, </span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"airway"</span>, <span class="st">"CPR"</span>, <span class="st">"intubation_or_ventilation"</span>, <span class="st">"induced_vomiting_or_catharsis"</span>, </span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"vasoactive_drugs"</span>, <span class="st">"activated_carbon"</span>, <span class="st">"gastric_lavage"</span>, <span class="st">"ECTR"</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 转换二值变量并确保其他变量为数值型</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co">#data[binary_vars] &lt;- lapply(data[binary_vars], function(x) as.numeric(as.factor(x)) - 1)</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>censor <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>censor)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 确保数值型变量为数值型</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>data[numeric_vars] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data[numeric_vars], as.numeric)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>data[binary_vars] <span class="ot">&lt;-</span><span class="fu">lapply</span>(data[binary_vars], as.factor)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [334 × 19] (S3: tbl_df/tbl/data.frame)
+ $ outcome                              : chr [1:334] "survive" "survive" "survive" "survive" ...
+ $ censor                               : num [1:334] 0 0 0 0 0 0 0 0 0 0 ...
+ $ survival_time                        : num [1:334] 1 1 12.13 2.21 2.29 ...
+ $ ECTR                                 : Factor w/ 2 levels "No","Yes": 2 1 2 1 2 1 1 2 1 2 ...
+ $ toxin_1                              : chr [1:334] "敌敌畏" "乐果" "敌敌畏" "敌敌畏" ...
+ $ toxin_1_eng                          : chr [1:334] "Dichlorvos" "Dimethoate" "Dichlorvos" "Dichlorvos" ...
+ $ dosage_liquid_1                      : num [1:334] 50 50 40 5 50 100 30 200 30 10 ...
+ $ sex                                  : Factor w/ 2 levels "Female","Male": 1 1 2 2 2 1 2 1 2 2 ...
+ $ age                                  : num [1:334] 40 85 47 48 64 52 33 68 35 53 ...
+ $ mental_health_illness                : Factor w/ 2 levels "No","Yes": 1 1 1 1 1 1 1 2 1 1 ...
+ $ hypertension                         : Factor w/ 2 levels "No","Yes": 1 2 1 1 1 1 1 2 1 1 ...
+ $ history_of_past_mental_health_disease: Factor w/ 2 levels "No","Yes": 2 2 2 1 2 2 2 1 2 1 ...
+ $ airway                               : Factor w/ 2 levels "No","Yes": 1 2 2 2 2 2 2 2 2 2 ...
+ $ CPR                                  : Factor w/ 2 levels "No","Yes": 1 1 1 1 1 1 1 1 1 1 ...
+ $ intubation_or_ventilation            : Factor w/ 2 levels "No","Yes": 2 1 1 1 1 1 1 1 1 1 ...
+ $ induced_vomiting_or_catharsis        : Factor w/ 2 levels "No","Yes": 1 1 2 2 2 2 2 2 2 2 ...
+ $ vasoactive_drugs                     : Factor w/ 2 levels "No","Yes": 1 1 1 1 1 1 1 1 1 1 ...
+ $ activated_carbon                     : Factor w/ 2 levels "No","Yes": 1 1 1 1 1 1 1 1 1 1 ...
+ $ gastric_lavage                       : Factor w/ 2 levels "No","Yes": 2 1 2 2 2 2 2 2 2 2 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 去除包含缺失值的行</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(data[, <span class="fu">c</span>(<span class="st">"survival_time"</span>, <span class="st">"censor"</span>, binary_vars, numeric_vars)])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 全模型公式</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>full_formula <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"Surv(survival_time, censor) ~"</span>, <span class="fu">paste</span>(<span class="fu">c</span>(binary_vars, numeric_vars), <span class="at">collapse =</span> <span class="st">" + "</span>)))</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 拟合全模型</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">&lt;-</span> <span class="fu">coxph</span>(full_formula, <span class="at">data =</span> data)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用后向逐步回归简化模型</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>backward_model <span class="ot">&lt;-</span> <span class="fu">step</span>(full_model, <span class="at">direction =</span> <span class="st">"backward"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=295.91
+Surv(survival_time, censor) ~ sex + mental_health_illness + hypertension + 
+    history_of_past_mental_health_disease + airway + CPR + intubation_or_ventilation + 
+    induced_vomiting_or_catharsis + vasoactive_drugs + activated_carbon + 
+    gastric_lavage + ECTR + dosage_liquid_1 + age
+
+                                        Df    AIC
+- activated_carbon                       1 293.91
+- mental_health_illness                  1 293.93
+- airway                                 1 293.94
+- ECTR                                   1 294.40
+- hypertension                           1 294.41
+- gastric_lavage                         1 294.62
+- history_of_past_mental_health_disease  1 294.69
+- induced_vomiting_or_catharsis          1 295.07
+&lt;none&gt;                                     295.91
+- vasoactive_drugs                       1 296.76
+- sex                                    1 298.85
+- CPR                                    1 300.98
+- intubation_or_ventilation              1 301.08
+- dosage_liquid_1                        1 302.29
+- age                                    1 304.93
+
+Step:  AIC=293.91
+Surv(survival_time, censor) ~ sex + mental_health_illness + hypertension + 
+    history_of_past_mental_health_disease + airway + CPR + intubation_or_ventilation + 
+    induced_vomiting_or_catharsis + vasoactive_drugs + gastric_lavage + 
+    ECTR + dosage_liquid_1 + age
+
+                                        Df    AIC
+- mental_health_illness                  1 291.94
+- airway                                 1 291.95
+- hypertension                           1 292.42
+- ECTR                                   1 292.42
+- gastric_lavage                         1 292.70
+- history_of_past_mental_health_disease  1 292.77
+- induced_vomiting_or_catharsis          1 293.14
+&lt;none&gt;                                     293.91
+- vasoactive_drugs                       1 295.09
+- sex                                    1 296.88
+- intubation_or_ventilation              1 299.17
+- CPR                                    1 299.20
+- dosage_liquid_1                        1 300.52
+- age                                    1 303.52
+
+Step:  AIC=291.94
+Surv(survival_time, censor) ~ sex + hypertension + history_of_past_mental_health_disease + 
+    airway + CPR + intubation_or_ventilation + induced_vomiting_or_catharsis + 
+    vasoactive_drugs + gastric_lavage + ECTR + dosage_liquid_1 + 
+    age
+
+                                        Df    AIC
+- airway                                 1 289.97
+- ECTR                                   1 290.43
+- hypertension                           1 290.45
+- gastric_lavage                         1 290.70
+- history_of_past_mental_health_disease  1 290.81
+- induced_vomiting_or_catharsis          1 291.15
+&lt;none&gt;                                     291.94
+- vasoactive_drugs                       1 293.09
+- sex                                    1 295.10
+- CPR                                    1 297.23
+- intubation_or_ventilation              1 297.39
+- dosage_liquid_1                        1 298.61
+- age                                    1 301.62
+
+Step:  AIC=289.97
+Surv(survival_time, censor) ~ sex + hypertension + history_of_past_mental_health_disease + 
+    CPR + intubation_or_ventilation + induced_vomiting_or_catharsis + 
+    vasoactive_drugs + gastric_lavage + ECTR + dosage_liquid_1 + 
+    age
+
+                                        Df    AIC
+- ECTR                                   1 288.44
+- hypertension                           1 288.45
+- gastric_lavage                         1 288.70
+- history_of_past_mental_health_disease  1 288.94
+- induced_vomiting_or_catharsis          1 289.22
+&lt;none&gt;                                     289.97
+- vasoactive_drugs                       1 291.13
+- sex                                    1 293.14
+- CPR                                    1 295.36
+- intubation_or_ventilation              1 295.62
+- dosage_liquid_1                        1 296.63
+- age                                    1 299.63
+
+Step:  AIC=288.44
+Surv(survival_time, censor) ~ sex + hypertension + history_of_past_mental_health_disease + 
+    CPR + intubation_or_ventilation + induced_vomiting_or_catharsis + 
+    vasoactive_drugs + gastric_lavage + dosage_liquid_1 + age
+
+                                        Df    AIC
+- hypertension                           1 286.81
+- gastric_lavage                         1 287.11
+- history_of_past_mental_health_disease  1 287.28
+- induced_vomiting_or_catharsis          1 288.35
+&lt;none&gt;                                     288.44
+- vasoactive_drugs                       1 289.94
+- sex                                    1 291.49
+- CPR                                    1 293.58
+- intubation_or_ventilation              1 294.02
+- dosage_liquid_1                        1 294.65
+- age                                    1 298.26
+
+Step:  AIC=286.81
+Surv(survival_time, censor) ~ sex + history_of_past_mental_health_disease + 
+    CPR + intubation_or_ventilation + induced_vomiting_or_catharsis + 
+    vasoactive_drugs + gastric_lavage + dosage_liquid_1 + age
+
+                                        Df    AIC
+- gastric_lavage                         1 285.68
+- history_of_past_mental_health_disease  1 285.90
+- induced_vomiting_or_catharsis          1 286.38
+&lt;none&gt;                                     286.81
+- vasoactive_drugs                       1 288.67
+- sex                                    1 290.71
+- CPR                                    1 291.58
+- intubation_or_ventilation              1 292.33
+- dosage_liquid_1                        1 292.92
+- age                                    1 296.26
+
+Step:  AIC=285.68
+Surv(survival_time, censor) ~ sex + history_of_past_mental_health_disease + 
+    CPR + intubation_or_ventilation + induced_vomiting_or_catharsis + 
+    vasoactive_drugs + dosage_liquid_1 + age
+
+                                        Df    AIC
+- history_of_past_mental_health_disease  1 284.95
+- induced_vomiting_or_catharsis          1 285.08
+&lt;none&gt;                                     285.68
+- vasoactive_drugs                       1 288.26
+- sex                                    1 289.06
+- intubation_or_ventilation              1 290.66
+- CPR                                    1 291.55
+- dosage_liquid_1                        1 292.82
+- age                                    1 296.11
+
+Step:  AIC=284.95
+Surv(survival_time, censor) ~ sex + CPR + intubation_or_ventilation + 
+    induced_vomiting_or_catharsis + vasoactive_drugs + dosage_liquid_1 + 
+    age
+
+                                Df    AIC
+- induced_vomiting_or_catharsis  1 284.26
+&lt;none&gt;                             284.95
+- sex                            1 287.51
+- intubation_or_ventilation      1 289.09
+- vasoactive_drugs               1 290.28
+- CPR                            1 290.81
+- dosage_liquid_1                1 291.34
+- age                            1 296.34
+
+Step:  AIC=284.26
+Surv(survival_time, censor) ~ sex + CPR + intubation_or_ventilation + 
+    vasoactive_drugs + dosage_liquid_1 + age
+
+                            Df    AIC
+&lt;none&gt;                         284.26
+- sex                        1 286.29
+- intubation_or_ventilation  1 288.16
+- CPR                        1 289.49
+- vasoactive_drugs           1 289.61
+- dosage_liquid_1            1 290.04
+- age                        1 295.43</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 算c_index</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>summary_model <span class="ot">&lt;-</span> <span class="fu">summary</span>(backward_model)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>backward_model<span class="sc">$</span>concordance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  concordant   discordant       tied.x       tied.y      tied.xy  concordance 
+7.148000e+03 6.100000e+02 0.000000e+00 1.000000e+00 0.000000e+00 9.213715e-01 
+         std 
+1.453989e-02 </code></pre>
+</div>
+</div>
 
 
 </section>

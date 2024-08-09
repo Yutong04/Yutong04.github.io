@@ -3,17 +3,17 @@ project:
   output-dir: docs
   
 website: 
-  title: "Yutong Homepage"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Use of glm
+  title: "Survival Analysis in Poisoning"
+  # navbar:
+    # left:
+    #  - href: surf2024.qmd
+    #    text: Survival Analysis in Poisoning
     #  - href: edu.qmd
     #    text: Education
-      - href: ggplot2.qmd
-        text: Use of ggplot2
-      - href: deviance.qmd
-        text: What is deviance 
+    #  - href: ggplot2.qmd
+    #    text: Use of ggplot2
+    #  - href: deviance.qmd
+    #    text: What is deviance 
 format: 
   html: 
     theme: cosmo
