@@ -89,7 +89,7 @@ library(dplyr)
 library(survival)
 library(Hmisc)
 library(ggplot2)
-data_path <- "/Users/liyutong/Desktop/Yutong04.github.io/Book2.xlsx"
+data_path <- "/Users/liyutong/Desktop/Book2.xlsx"
 train_df <- read_excel(data_path, skip = 1)
 set.seed(537)
 
@@ -155,7 +155,7 @@ library(survival)  # 用于Cox回归模型
 library(Hmisc)  # 用于计算C-index
 
 # 读取数据
-data <- read_excel("/Users/liyutong/Desktop/Yutong04.github.io/Book2.xlsx", skip = 1)
+data <- read_excel("/Users/liyutong/Desktop/Book2.xlsx", skip = 1)
 
 # 定义新的数值变量和二值变量
 numeric_vars <- c("dosage_liquid_1", "age")
